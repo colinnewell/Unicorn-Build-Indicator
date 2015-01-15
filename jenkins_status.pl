@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use Unicorn;
 use Jenkins::API;
-use List::Util qw/all/;
+use List::Util 1.41 qw/all/;
 
 my $api = Jenkins::API->new({ base_url => 'http://jenkins-t2:8080' });
 my $view_list = $api->current_status({ extra_params => { tree => 'views[name]' }});
