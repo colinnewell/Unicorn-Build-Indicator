@@ -5,7 +5,17 @@ use Unicorn;
 use Jenkins::API;
 use List::Util 1.41 qw/all/;
 
-my $api = Jenkins::API->new({ base_url => 'http://jenkins-t2:8080' });
+my $url = shift;
+my $user = shift;
+my $auth_token = shift;
+
+my $args = { base_url => $url };
+if($user && $auth_token)
+{
+    $args->{api_key} = $user;
+    $args->{api_pass} = $auth_token;
+}
+my $api = Jenkins::API->new($args);
 my $view_list = $api->current_status({ extra_params => { tree => 'views[name]' }});
 my @views = grep { $_ ne 'All' } map { $_->{name} } @{$view_list->{views}};
 my $ok = 1;
