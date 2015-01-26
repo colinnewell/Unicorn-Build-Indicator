@@ -15,7 +15,14 @@ if($user && $auth_token)
     $args->{api_key} = $user;
     $args->{api_pass} = $auth_token;
 }
+my $u = Unicorn->new();
 my $api = Jenkins::API->new($args);
+unless($api->check_jenkins_url)
+{
+    $u->clear;
+    $u->show;
+    exit 1;
+}
 my $view_list = $api->current_status({ extra_params => { tree => 'views[name]' }});
 my @views = grep { $_ ne 'All' } map { $_->{name} } @{$view_list->{views}};
 my $ok = 1;
@@ -26,7 +33,6 @@ for my $view (@views)
     $ok = $ok && $view_ok;
 }
 
-my $u = Unicorn->new();
 $u->set_brightness(0.1);
 
 my @pixels;
