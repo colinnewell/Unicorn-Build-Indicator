@@ -6,7 +6,8 @@ plugged into a Raspberry Pi running raspbian.
 
 This relies on the C daemon from the
 [UnicornHat](https://github.com/pimoroni/UnicornHat/tree/master/c/unicornd)
-repository being installed.
+repository being installed.  Once this is installed install the
+perl dependencies you need using these commands,
 
 ```bash
   sudo apt-get install cpanminus
