@@ -29,7 +29,8 @@ my $ok = 1;
 for my $view (@views)
 {
     my $view_jobs = $api->view_status($view, { extra_params => { tree => 'jobs[name,color]' }});
-    my $view_ok = all { $_ =~ /^blue/ } map { $_->{color} } @{$view_jobs->{jobs}};
+    # don't fail for aborted jobs.
+    my $view_ok = all { $_ =~ /^(blue|aborted)/ } map { $_->{color} } @{$view_jobs->{jobs}};
     $ok = $ok && $view_ok;
 }
 
