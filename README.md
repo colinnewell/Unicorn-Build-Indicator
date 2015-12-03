@@ -10,7 +10,7 @@ repository being installed.  Once this is installed install the
 perl dependencies you need using these commands,
 
 ```bash
-  sudo apt-get install cpanminus
+  sudo apt-get install cpanminus libssl-dev
   cpanm Jenkins::API List::Util
   # now go for a meal, this may take a while.
   # repeat the previous command if it fails,
